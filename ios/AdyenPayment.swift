@@ -55,6 +55,10 @@ class AdyenPayment: RCTEventEmitter {
         PaymentsData.shopperEmail = paymentDetails["shopperEmail"] as! String
         PaymentsData.shopperLocale = paymentDetails["shopperLocale"] as! String
         PaymentsData.merchantAccount = paymentDetails["merchantAccount"] as! String
+        // CARD ON FILE
+        PaymentsData.shopperInteraction = paymentDetails["shopperInteraction"] as! String
+        PaymentsData.recurringProcessingModel = paymentDetails["recurringProcessingModel"] as! String
+        // END CARD ON FILE
         if(additionalData != nil){
             let allow3DS2 : Bool = (additionalData?["allow3DS2"] != nil) ? additionalData?["allow3DS2"] as! Bool : false
             let executeThreeD : Bool = (additionalData?["executeThreeD"] != nil) ? additionalData?["executeThreeD"] as! Bool : false
