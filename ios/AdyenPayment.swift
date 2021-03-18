@@ -104,11 +104,10 @@ class AdyenPayment: RCTEventEmitter {
                 self.showDropInComponent(configuration: configuration)
             }else{
                 var style = FormComponentStyle()
-                style.backgroundColor = .black
-                style.header.title.color = .white
-                style.textField.title.color = .white
-                style.textField.text.color = .white
-                style.switch.title.color = .white
+                style.mainButtonItem.backgroundColor = .yellow
+                style.mainButtonItem.button.backgroundColor = .yellow
+                style.secondaryButtonItem.backgroundColor = .yellow
+                style.secondaryButtonItem.button.backgroundColor = .yellow
 
                 let component = CardComponent(paymentMethod: paymentMethod, publicKey:(cardComponent["card_public_key"] as! String), style: style)
                 self.present(component)
@@ -184,11 +183,18 @@ class AdyenPayment: RCTEventEmitter {
                     break
                 }
             }
-            var style = FormComponentStyle()
-            style.mainButtonItem.backgroundColor = .yellow
-            style.mainButtonItem.button.backgroundColor = .yellow
-            style.secondaryButtonItem.backgroundColor = .yellow
-            style.secondaryButtonItem.button.backgroundColor = .yellow
+            let greenColor = UIColor(red:0.84, green:0.93, blue:0.12, alpha:1.0)
+            var style = DropInComponent.Style()
+            style.formComponent.mainButtonItem.backgroundColor = greenColor
+            style.formComponent.mainButtonItem.button.backgroundColor = greenColor
+            style.formComponent.secondaryButtonItem.backgroundColor = greenColor
+            style.formComponent.secondaryButtonItem.button.backgroundColor = greenColor
+            style.formComponent.header.title.color = greenColor
+            style.formComponent.header.backgroundColor = greenColor
+            
+            style.formComponent.footer.backgroundColor = greenColor
+            style.formComponent.footer.button.backgroundColor = greenColor
+            style.formComponent.footer.button.title.color = greenColor
             let dropInComponent = DropInComponent(paymentMethods: PaymentMethods(regular:regularPaymentMethods, stored:storedPaymentMethods),paymentMethodsConfiguration: configuration, style: style)
             dropInComponent.delegate = self
             self.present(dropInComponent)
