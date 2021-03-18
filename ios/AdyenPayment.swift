@@ -364,7 +364,7 @@ class AdyenPayment: RCTEventEmitter {
     }
     
     func performPaymentDetails(with data: ActionComponentData) {
-        let request = PaymentDetailsRequest(details: data.details, paymentData: data.paymentData)
+        let request = PaymentDetailsRequest(details: data.details, paymentData: data!.paymentData)
         apiClient.perform(request, completionHandler: paymentResponseHandler)
     }
     
