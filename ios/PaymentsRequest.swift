@@ -18,10 +18,6 @@ internal struct PaymentsData {
     static var shopperEmail: String = ""
     static var merchantAccount : String = ""
     static var additionalData : [String : Any] = ["allow3DS2": true,"executeThreeD":true]
-
-    // CARD ON FILE
-    static var recurringProcessingModel: String = ""
-    static var shopperInteraction: String = ""
 }
 
 internal struct PaymentsRequest: Request {
@@ -53,10 +49,6 @@ internal struct PaymentsRequest: Request {
         try container.encode(PaymentsData.shopperEmail, forKey: .shopperEmail)
         try container.encode(PaymentsData.shopperLocale, forKey: .shopperLocale)
         try container.encode(PaymentsData.additionalData, forKey: .additionalData)
-
-        // CARD ON FILE
-        try container.encode(PaymentsData.recurringProcessingModel, forKey: .recurringProcessingModel)
-        try container.encode(PaymentsData.shopperInteraction, forKey: .shopperInteraction)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -72,10 +64,6 @@ internal struct PaymentsRequest: Request {
         case shopperLocale
         case additionalData
         case merchantAccount
-
-        // CARD ON FILE
-        case recurringProcessingModel
-        case shopperInteraction
     }
 }
 

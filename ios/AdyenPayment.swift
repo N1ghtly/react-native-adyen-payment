@@ -55,10 +55,6 @@ class AdyenPayment: RCTEventEmitter {
         PaymentsData.shopperEmail = paymentDetails["shopperEmail"] as! String
         PaymentsData.shopperLocale = paymentDetails["shopperLocale"] as! String
         PaymentsData.merchantAccount = paymentDetails["merchantAccount"] as! String
-        // CARD ON FILE
-        PaymentsData.shopperInteraction = paymentDetails["shopperInteraction"] as! String
-        PaymentsData.recurringProcessingModel = paymentDetails["recurringProcessingModel"] as! String
-        // END CARD ON FILE
         if(additionalData != nil){
             let allow3DS2 : Bool = (additionalData?["allow3DS2"] != nil) ? additionalData?["allow3DS2"] as! Bool : false
             let executeThreeD : Bool = (additionalData?["executeThreeD"] != nil) ? additionalData?["executeThreeD"] as! Bool : false
@@ -107,7 +103,14 @@ class AdyenPayment: RCTEventEmitter {
                 configuration.card.publicKey = cardComponent["card_public_key"] as? String
                 self.showDropInComponent(configuration: configuration)
             }else{
-                let component = CardComponent(paymentMethod: paymentMethod, publicKey:(cardComponent["card_public_key"] as! String))
+                var style = FormComponentStyle()
+                style.backgroundColor = .black
+                style.header.title.color = .white
+                style.textField.title.color = .white
+                style.textField.text.color = .white
+                style.switch.title.color = .white
+
+                let component = CardComponent(paymentMethod: paymentMethod, publicKey:(cardComponent["card_public_key"] as! String), style: style)
                 self.present(component)
             }
         }
@@ -181,7 +184,12 @@ class AdyenPayment: RCTEventEmitter {
                     break
                 }
             }
-            let dropInComponent = DropInComponent(paymentMethods: PaymentMethods(regular:regularPaymentMethods, stored:storedPaymentMethods),paymentMethodsConfiguration: configuration)
+            var style = FormComponentStyle()
+            style.mainButtonItem.backgroundColor = .yellow
+            style.mainButtonItem.button.backgroundColor = .yellow
+            style.secondaryButtonItem.backgroundColor = .yellow
+            style.secondaryButtonItem.button.backgroundColor = .yellow
+            let dropInComponent = DropInComponent(paymentMethods: PaymentMethods(regular:regularPaymentMethods, stored:storedPaymentMethods),paymentMethodsConfiguration: configuration, style: style)
             dropInComponent.delegate = self
             self.present(dropInComponent)
         }
