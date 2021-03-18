@@ -185,18 +185,13 @@ class AdyenPayment: RCTEventEmitter {
                     break
                 }
             }
-            let greenColor = UIColor(red:0.84, green:0.93, blue:0.12, alpha:1.0)
+            let yellowColor = UIColor(red:0.99, green:0.9, blue:0.01, alpha:1.0)
             var style = DropInComponent.Style()
-            style.formComponent.mainButtonItem.backgroundColor = greenColor
-            style.formComponent.mainButtonItem.button.backgroundColor = greenColor
-            style.formComponent.secondaryButtonItem.backgroundColor = greenColor
-            style.formComponent.secondaryButtonItem.button.backgroundColor = greenColor
-            style.formComponent.header.title.color = greenColor
-            style.formComponent.header.backgroundColor = greenColor
+            style.formComponent.mainButtonItem.backgroundColor = yellowColor
+            style.formComponent.mainButtonItem.button.backgroundColor =  yellowColor
+            style.formComponent.secondaryButtonItem.backgroundColor =  yellowColor
+            style.formComponent.secondaryButtonItem.button.backgroundColor =  yellowColor
             
-            style.formComponent.footer.button.title.color = greenColor
-            style.formComponent.footer.backgroundColor = .red
-            style.formComponent.footer.button.backgroundColor = .red
             let dropInComponent = DropInComponent(paymentMethods: PaymentMethods(regular:regularPaymentMethods, stored:storedPaymentMethods),paymentMethodsConfiguration: configuration, style: style)
             dropInComponent.delegate = self
             self.present(dropInComponent)
@@ -304,7 +299,14 @@ class AdyenPayment: RCTEventEmitter {
             configuration.applePay.summaryItems = applePaySummaryItems
         }
         DispatchQueue.main.async {
-            let dropInComponent = DropInComponent(paymentMethods: self.paymentMethods!,paymentMethodsConfiguration: configuration)
+            let yellowColor = UIColor(red:0.99, green:0.9, blue:0.01, alpha:1.0)
+            var style = DropInComponent.Style()
+            style.formComponent.mainButtonItem.backgroundColor = yellowColor
+            style.formComponent.mainButtonItem.button.backgroundColor =  yellowColor
+            style.formComponent.secondaryButtonItem.backgroundColor =  yellowColor
+            style.formComponent.secondaryButtonItem.button.backgroundColor =  yellowColor
+
+            let dropInComponent = DropInComponent(paymentMethods: self.paymentMethods!,paymentMethodsConfiguration: configuration, style: style)
             dropInComponent.delegate = self
             self.present(dropInComponent)
         }
