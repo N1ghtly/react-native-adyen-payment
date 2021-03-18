@@ -104,6 +104,8 @@ class AdyenPayment: RCTEventEmitter {
                 self.showDropInComponent(configuration: configuration)
             }else{
                 var style = FormComponentStyle()
+                style.footer.backgroundColor = .red
+                style.footer.button.backgroundColor = .red
                 style.mainButtonItem.backgroundColor = .yellow
                 style.mainButtonItem.button.backgroundColor = .yellow
                 style.secondaryButtonItem.backgroundColor = .yellow
@@ -192,9 +194,9 @@ class AdyenPayment: RCTEventEmitter {
             style.formComponent.header.title.color = greenColor
             style.formComponent.header.backgroundColor = greenColor
             
-            style.formComponent.footer.backgroundColor = greenColor
-            style.formComponent.footer.button.backgroundColor = greenColor
             style.formComponent.footer.button.title.color = greenColor
+            style.formComponent.footer.backgroundColor = .red
+            style.formComponent.footer.button.backgroundColor = .red
             let dropInComponent = DropInComponent(paymentMethods: PaymentMethods(regular:regularPaymentMethods, stored:storedPaymentMethods),paymentMethodsConfiguration: configuration, style: style)
             dropInComponent.delegate = self
             self.present(dropInComponent)
@@ -364,7 +366,7 @@ class AdyenPayment: RCTEventEmitter {
     }
     
     func performPaymentDetails(with data: ActionComponentData) {
-        let request = PaymentDetailsRequest(details: data.details, paymentData: data!.paymentData)
+        let request = PaymentDetailsRequest(details: data.details, paymentData: data.paymentData!)
         apiClient.perform(request, completionHandler: paymentResponseHandler)
     }
     
